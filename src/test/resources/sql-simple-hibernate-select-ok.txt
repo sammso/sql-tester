@@ -1,0 +1,13 @@
+SELECT
+	{DLFileEntryType.*}
+FROM
+	DLFileEntryType
+WHERE
+	(
+		( DLFileEntryType.companyId = ?) AND
+		( DLFileEntryType.groupId = ? ) AND
+		(
+			(lower(DLFileEntryType.name) LIKE ? ) AND
+			(DLFileEntryType.description LIKE ? )
+		)
+	)

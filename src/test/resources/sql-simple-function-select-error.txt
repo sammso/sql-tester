@@ -1,0 +1,5 @@
+			SELECT
+				upper(companyId),
+				lower(groupId)
+			FROM
+				DLFileEntryType

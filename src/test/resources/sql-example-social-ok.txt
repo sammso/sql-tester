@@ -1,0 +1,52 @@
+			SELECT
+				DISTINCT {SocialActivitySet.*}
+			FROM
+				SocialActivitySet
+			WHERE
+				(
+					SocialActivitySet.groupId IN (
+						SELECT
+							Users_Orgs.groupId
+						FROM
+							Groups_Orgs
+						INNER JOIN
+							Users_Orgs ON
+								Users_Orgs.organizationId = Groups_Orgs.organizationId
+						WHERE
+							Users_Orgs.userId = ?
+					) OR
+					SocialActivitySet.groupId IN (
+						SELECT
+							Groups_UserGroups.groupId
+						FROM
+							Groups_UserGroups
+						INNER JOIN
+							Users_UserGroups ON
+								Users_UserGroups.userGroupId = Groups_UserGroups.userGroupId
+						WHERE
+							Users_UserGroups.userId = ?
+					) OR
+					SocialActivitySet.groupId IN (
+						SELECT
+							Users_Groups.groupId
+						FROM
+							Users_Groups
+						WHERE
+							Users_Groups.userId = ?
+					) OR
+					SocialActivitySet.activitySetId IN (
+						SELECT
+							SocialActivitySet.activitySetId
+						FROM
+							SocialActivitySet
+						INNER JOIN
+							SocialRelation ON
+								(SocialRelation.userId2 = SocialActivitySet.userId)
+						WHERE
+							(SocialRelation.userId1 = ?)
+					) OR (
+						SocialActivitySet.userId = ?
+					)
+				)
+			ORDER BY
+				SocialActivitySet.modifiedDate DESC

@@ -1,0 +1,7 @@
+			SELECT
+				DLFileEntryType.companyId,
+				DLFileEntryType.groupId
+			FROM
+				DLFileEntryType
+			GROUP BY 
+				DLFileEntryType.companyId 		

@@ -1,0 +1,14 @@
+			SELECT
+				companyId,
+				groupId
+			FROM
+				DLFileEntryType
+			WHERE
+				(
+					( companyId = ?) AND
+					( groupId = ? ) AND
+					(
+						(lower(name) LIKE ? ) AND
+						(description LIKE ? )
+					)
+				)

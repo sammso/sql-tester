@@ -1,0 +1,7 @@
+			SELECT
+				DLFileEntryType.companyId,
+				DLFileEntryType.groupId
+			FROM
+				DLFileEntryType
+			WHERE
+				DLFileEntryType.companyId IN (?, ?, ?)

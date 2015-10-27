@@ -1,0 +1,15 @@
+			SELECT
+				companyId,
+				groupId,
+				DLFileEntryType.name
+			FROM
+				DLFileEntryType inner join Group_ on Group_.groupId = DLFileEntryType.groupId
+			WHERE
+				(
+					( companyId = ?) AND
+					( groupId = ? ) AND
+					(
+						(lower(name) LIKE ? ) AND
+						(description LIKE ? )
+					)
+				)

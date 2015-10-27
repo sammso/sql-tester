@@ -1,0 +1,32 @@
+(
+			SELECT
+				DLFileEntry.companyId,
+				DLFileEntry.groupId
+			FROM
+				DLFileEntry
+			WHERE
+				(
+					( DLFileEntry.companyId = ?) AND
+					( DLFileEntry.groupId = ? ) AND
+					(
+						(lower(DLFileEntry.name) LIKE ? ) AND
+						(DLFileEntry.description LIKE ? )
+					)
+				)
+) UNION ( 
+			SELECT
+				DLFileEntryType.companyId,
+				DLFileEntryType.groupId
+			FROM
+				DLFileEntryType
+			WHERE
+				(
+					( DLFileEntryType.companyId = ?) AND
+					( DLFileEntryType.groupId = ? ) AND
+					(
+						(lower(DLFileEntryType.name) LIKE ? ) AND
+						(DLFileEntryType.description LIKE ? )
+					)
+				)
+)
+;
